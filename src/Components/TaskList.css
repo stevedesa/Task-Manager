@@ -1,0 +1,154 @@
+.TaskList {
+    height: 100%;
+    width: 100%;
+    background-color: aliceblue;
+}
+
+.EventManager {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    height: 110px;
+    border-style: double;
+    border-width: 7px;
+    border-color: #04D9FF;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.NewTask {
+    height: 45px;
+    width: 190px;
+    font-weight: bolder;
+    font-size: 15px;
+    border-radius: 10px;
+    border-width: 7px;
+    border-style: double;
+    border-color: #000000;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    background-color: #FFFFFF; 
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    color: #000000;
+
+    .GifTag {
+        height: 20px;
+    }
+}
+
+.NewTask:hover{
+    background-color: #FFFF00;
+}
+
+.EventsStats {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+
+    .Labels {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .TasksLeft {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .TasksLabel{
+        color: #FFFFFF;
+    }
+
+    .break {
+        color: #FFFFFF;
+    }
+
+    .TasksButton{
+        height: 45px;
+        width: 45px;
+        font-weight: bolder;
+        font-size: 15px;
+        border-radius: 10px;
+        border-width: 7px;
+        border-style: double;
+        border-color: #000000;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    .Left {
+        background-color: #DE1738;
+        color: #FFFFFF;
+    }
+
+    .Done {
+        background-color: #65FE08;
+        color: #000000;
+    }
+    
+    .NextTaskToComplete {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .UpcomingTask {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #FFFF00;
+        height: 45px;
+        width: auto;
+        border-radius: 10px;
+        border-width: 7px;
+        border-style: double;
+        border-color: #000000;
+        padding-left: 30px;
+        padding-right: 30px;
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+
+        .B {
+            color: #000000;
+            font-weight: bolder;
+        font-size: 15px;
+        }
+    }
+}
+
+.TasksTable {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    min-height: calc(100vh - 260px);
+    border-style: double;
+    border-width: 7px;
+    border-color: #65FE08;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.NotesSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    height: 100px;
+    border-style: double;
+    border-width: 7px;
+    border-color: #BC13FE;
+    padding-left: 30px;
+    padding-right: 30px;
+}
