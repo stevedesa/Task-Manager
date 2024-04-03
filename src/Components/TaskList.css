@@ -34,6 +34,7 @@
     justify-content: space-around;
     align-items: center;
     color: #000000;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
     .GifTag {
         height: 20px;
@@ -66,6 +67,7 @@
 
     .TasksLabel{
         color: #FFFFFF;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
 
     .break {
@@ -82,11 +84,17 @@
         border-style: double;
         border-color: #000000;
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .Over {
+        background-color: #DE1738;
+        color: #FFFFFF;
     }
 
     .Left {
-        background-color: #DE1738;
-        color: #FFFFFF;
+        background-color: #FFFFFF;
+        color: #000000;
     }
 
     .Done {
@@ -113,14 +121,27 @@
         border-width: 7px;
         border-style: double;
         border-color: #000000;
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-left: 10px;
+        padding-right: 10px;
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        gap: 10px;
 
         .B {
             color: #000000;
             font-weight: bolder;
-        font-size: 15px;
+            font-size: 15px;
+        }
+
+        .C {
+            color: red;
+            font-weight: bolder;
+            font-size: 15px;
+        }
+
+        .A {
+            color: blue;
+            font-weight: bolder;
+            font-size: 15px;
         }
     }
 }
@@ -145,10 +166,21 @@
     justify-content: space-between;
     align-items: center;
     background-color: #000000;
-    height: 100px;
+    height: auto;
     border-style: double;
     border-width: 7px;
     border-color: #BC13FE;
     padding-left: 30px;
     padding-right: 30px;
+
+    .NoteInput{
+        background-color: #000000;
+        color: #FFFFFF;
+        height: 100px;
+
+    }
+}
+
+.TableLayout {
+    background-color: #FFFFFF;
 }

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./TaskList.css";
 import Plus from "./plusicon.gif";
 import Table from "react-bootstrap/Table";
 
 function TaskList() {
+  const [noteText, setNoteText] = useState("");
+
   return (
     <div className="TaskList">
       <div className="EventManager">
@@ -17,32 +19,43 @@ function TaskList() {
               <label className="TasksLabel">Tasks</label>
               <label className="TasksLabel">To Complete</label>
             </div>
-            <h2 className="break">=></h2>
+            <h2 className="break">{"=>"}</h2>
             <button className="TasksButton Left">12</button>
           </div>
           <div className="TasksLeft">
             <div className="Labels">
-              <label className="TasksLabel">Upcoming</label>
-              <label className="TasksLabel">Task Due</label>
+              <label className="TasksLabel">Tasks</label>
+              <label className="TasksLabel">OverDue</label>
             </div>
-            <h2 className="break">=></h2>
-            <button className="UpcomingTask">
-              <label className="TasksLabel B">Task: </label>
-              <label className="TasksLabel B">Due: </label>
-            </button>
+            <h2 className="break">{"=>"}</h2>
+            <button className="TasksButton Over">6</button>
           </div>
           <div className="TasksLeft">
             <div className="Labels">
               <label className="TasksLabel">Tasks</label>
               <label className="TasksLabel">Completed</label>
             </div>
-            <h2 className="break">=></h2>
+            <h2 className="break">{"=>"}</h2>
             <button className="TasksButton Done">12</button>
+          </div>
+          <div className="TasksLeft">
+            <div className="Labels">
+              <label className="TasksLabel">Upcoming</label>
+              <label className="TasksLabel">Task Due</label>
+            </div>
+            <h2 className="break">{"=>"}</h2>
+            <button className="UpcomingTask">
+              <label className="TasksLabel C">Task {"->"} </label>
+              <label className="TasksLabel B">Database Quiz</label>
+              <label className="TasksLabel A">{"|"}</label>
+              <label className="TasksLabel C">Due {"->"} </label>
+              <label className="TasksLabel B">10 April 2024 : 10:30 PM</label>
+            </button>
           </div>
         </div>
       </div>
       <div className="TasksTable">
-        <Table>
+        <Table className="TableLayout">
           <thead>
             <tr>
               <th>#</th>
@@ -72,7 +85,14 @@ function TaskList() {
           </tbody>
         </Table>
       </div>
-      <div className="NotesSection"></div>
+      <div className="NotesSection">
+        <textarea
+          className="NoteInput"
+          placeholder="Write Your Notes Here..."
+          value={noteText}
+          onChange={(e) => setNoteText(e.target.value)}
+        ></textarea>
+      </div>
     </div>
   );
 }
