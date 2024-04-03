@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./TaskList.css";
 import Plus from "./plusicon.gif";
-import Table from "react-bootstrap/Table";
 
 function TaskList() {
   const [noteText, setNoteText] = useState("");
@@ -20,7 +19,7 @@ function TaskList() {
               <label className="TasksLabel">To Complete</label>
             </div>
             <h2 className="break">{"=>"}</h2>
-            <button className="TasksButton Left">12</button>
+            <button className="TasksButton Left">1</button>
           </div>
           <div className="TasksLeft">
             <div className="Labels">
@@ -28,7 +27,7 @@ function TaskList() {
               <label className="TasksLabel">OverDue</label>
             </div>
             <h2 className="break">{"=>"}</h2>
-            <button className="TasksButton Over">6</button>
+            <button className="TasksButton Over">1</button>
           </div>
           <div className="TasksLeft">
             <div className="Labels">
@@ -36,12 +35,12 @@ function TaskList() {
               <label className="TasksLabel">Completed</label>
             </div>
             <h2 className="break">{"=>"}</h2>
-            <button className="TasksButton Done">12</button>
+            <button className="TasksButton Done">1</button>
           </div>
           <div className="TasksLeft">
             <div className="Labels">
               <label className="TasksLabel">Upcoming</label>
-              <label className="TasksLabel">Task Due</label>
+              <label className="TasksLabel">Task</label>
             </div>
             <h2 className="break">{"=>"}</h2>
             <button className="UpcomingTask">
@@ -54,47 +53,55 @@ function TaskList() {
           </div>
         </div>
       </div>
-      <div className="TasksTable">
-        <div className="TableEntry TOpen">
-          <div className="TLeftContent">
-            <button className="EventStatus Open">O</button>
-            <button className="EventName Open">Database Quiz</button>
-            <button className="EventName Open">Due {"->"} 8 April 2024</button>
-            <button className="EventName Open">
-              Topics: Chapters 1, 2, and 3
-            </button>
+      <div className="TableDiv">
+        <h2 className="TasksTag">
+          {"-> "}To-Do List{" <-"}
+        </h2>
+        <div className="TasksTable">
+          <div className="TableEntry TOpen">
+            <div className="TLeftContent">
+              <button className="EventStatus Open">O</button>
+              <button className="EventName Open">Database Quiz</button>
+              <button className="EventName Open">
+                Due {"->"} 8 April 2024 | 12:00 PM
+              </button>
+              <button className="EventName Open">
+                Topics: Chapters 1, 2, and 3
+              </button>
+            </div>
+            <button className="EditButton">Edit</button>
           </div>
-          <button className="EditButton">Edit</button>
-        </div>
-        <div className="TableEntry TOverDue">
-          <div className="TLeftContent">
-            <button className="EventStatus OverDue">!</button>
-            <button className="EventName OverDue">Stats Quiz</button>
-            <button className="EventName OverDue">
-              Due {"->"} 4 April 2024
-            </button>
-            <button className="EventName OverDue">
-              Topics: Chapters 4, 5, and 6
-            </button>
+          <div className="TableEntry TOverDue">
+            <div className="TLeftContent">
+              <button className="EventStatus OverDue">!</button>
+              <button className="EventName OverDue">Stats Quiz</button>
+              <button className="EventName OverDue">
+                Due {"->"} 4 April 2024 | 11:00 AM
+              </button>
+              <button className="EventName OverDue">
+                Topics: Chapters 4, 5, and 6
+              </button>
+            </div>
+            <button className="EditButton">Edit</button>
           </div>
-          <button className="EditButton">Edit</button>
-        </div>
-        <div className="TableEntry TClosed">
-          <div className="TLeftContent">
-            <button className="EventStatus Closed">X</button>
-            <button className="EventName Closed">
-              Software Engineering Quiz
-            </button>
-            <button className="EventName Closed">
-              Due {"->"} 2 April 2024
-            </button>
-            <button className="EventName Closed">
-              Topics: Chapters 7, 8, and 9
-            </button>
+          <div className="TableEntry TClosed">
+            <div className="TLeftContent">
+              <button className="EventStatus Closed">X</button>
+              <button className="EventName Closed">
+                Software Engineering Quiz
+              </button>
+              <button className="EventName Closed">
+                Due {"->"} 2 April 2024 | 8:00 AM
+              </button>
+              <button className="EventName Closed">
+                Topics: Chapters 7, 8, and 9
+              </button>
+            </div>
+            <button className="EditButton">Edit</button>
           </div>
-          <button className="EditButton">Edit</button>
         </div>
       </div>
+
       <div className="NotesSection">
         <h2 className="NotesTag">
           {"-> "}Notes{" <-"}

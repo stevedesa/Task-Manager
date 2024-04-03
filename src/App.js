@@ -3,6 +3,7 @@ import axios from "axios";
 import "./App.css";
 import ToDoList from "./list.png";
 import TaskList from "./Components/TaskList";
+import WP from "./wp.jpg";
 
 function App() {
   const [loginSignupBox, setLoginSignupBox] = useState(null);
@@ -102,7 +103,7 @@ function App() {
 
   return (
     <div className="AppPage">
-      <div className="NavBar">
+      <div className={`NavBar ${isLoggedIn ? "Y" : "N"}`}>
         <div className="LeftContent">
           <img className="ToDoLogo" src={ToDoList} alt="Logo" />
           <h2 className="TitleName">To-Do List Manager</h2>
@@ -235,9 +236,12 @@ function App() {
           </div>
         )}
       </div>
-      <div className="TaskListDiv">
-        <TaskList />
-      </div>
+      <div className="TaskListDiv">{isLoggedIn && <TaskList />}</div>
+      {!isLoggedIn && (
+        <div className="ImageDiv">
+          <img src={WP} className="WP" alt="Task Manager" />
+        </div>
+      )}
     </div>
   );
 }

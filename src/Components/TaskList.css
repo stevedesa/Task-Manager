@@ -13,9 +13,10 @@
     height: 110px;
     border-style: double;
     border-width: 7px;
-    border-color: #04D9FF;
-    padding-left: 30px;
-    padding-right: 30px;
+    /* border-color: #04D9FF; */
+    border-color: #000000;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .NewTask {
@@ -114,7 +115,8 @@
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        background-color: #FFFF00;
+        /* background-color: #FFFF00; */
+        background-color: #FFFFFF;
         height: 45px;
         width: auto;
         border-radius: 10px;
@@ -146,18 +148,30 @@
     }
 }
 
+.TableDiv{
+    background-color: #000000;
+    min-height: calc(100vh - 520px);
+    border-style: double;
+    border-width: 7px;
+    /* border-color: #FFCC00; */
+    border-color: #000000;
+
+    .TasksTag {
+        color: #FFFFFF;
+        font-weight: bolder;
+        font-size: 15px;
+    }
+}
+
 .TasksTable {
+    margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    background-color: #000000;
-    min-height: calc(100vh - 525px);
-    border-style: double;
-    border-width: 7px;
-    border-color: #FFCC00;
-    padding: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 .TOpen {
@@ -254,9 +268,10 @@
     height: auto;
     border-style: double;
     border-width: 7px;
-    border-color: #BC13FE;
-    padding-left: 30px;
-    padding-right: 30px;
+    /* border-color: #BC13FE; */
+    border-color: #000000;
+    padding-left: 35px;
+    padding-right: 35px;
     padding-bottom: 15px;
 
     .NotesTag {
@@ -268,14 +283,15 @@
     .NoteInput{
         padding: 10px;
         max-width: 100%;
-        max-height: 100px;
+        min-width: 100%;
+        min-height: 155px;
         line-height: 1.5;
         background-color: #000000;
         color: #FFFFFF;
         height: 200px;
         text-align: center;
         border-color: #DDDDDD;
-        border-radius: 5px;
+        border-radius: 10px;
         border-width: 7px;
         border-style: double;
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);

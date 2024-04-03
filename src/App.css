@@ -22,6 +22,12 @@
   height: 110px;
   border-style: double;
   border-width: 7px;
+}
+
+.Y {
+  border-color: #CFFF04;
+}
+.N {
   border-color: #FF073A;
 }
 
@@ -167,4 +173,19 @@
 .TaskListDiv {
   width: 100%;
   height: auto;
+}
+
+.ImageDiv {
+  width: 100%;
+  height: calc(100vh - 125px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.WP {
+  height: 600px;
+  width: auto;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
