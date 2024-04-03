@@ -55,37 +55,50 @@ function TaskList() {
         </div>
       </div>
       <div className="TasksTable">
-        <Table className="TableLayout">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td colSpan={2}>Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </Table>
+        <div className="TableEntry TOpen">
+          <div className="TLeftContent">
+            <button className="EventStatus Open">O</button>
+            <button className="EventName Open">Database Quiz</button>
+            <button className="EventName Open">Due {"->"} 8 April 2024</button>
+            <button className="EventName Open">
+              Topics: Chapters 1, 2, and 3
+            </button>
+          </div>
+          <button className="EditButton">Edit</button>
+        </div>
+        <div className="TableEntry TOverDue">
+          <div className="TLeftContent">
+            <button className="EventStatus OverDue">!</button>
+            <button className="EventName OverDue">Stats Quiz</button>
+            <button className="EventName OverDue">
+              Due {"->"} 4 April 2024
+            </button>
+            <button className="EventName OverDue">
+              Topics: Chapters 4, 5, and 6
+            </button>
+          </div>
+          <button className="EditButton">Edit</button>
+        </div>
+        <div className="TableEntry TClosed">
+          <div className="TLeftContent">
+            <button className="EventStatus Closed">X</button>
+            <button className="EventName Closed">
+              Software Engineering Quiz
+            </button>
+            <button className="EventName Closed">
+              Due {"->"} 2 April 2024
+            </button>
+            <button className="EventName Closed">
+              Topics: Chapters 7, 8, and 9
+            </button>
+          </div>
+          <button className="EditButton">Edit</button>
+        </div>
       </div>
       <div className="NotesSection">
+        <h2 className="NotesTag">
+          {"-> "}Notes{" <-"}
+        </h2>
         <textarea
           className="NoteInput"
           placeholder="Write Your Notes Here..."
