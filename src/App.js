@@ -136,7 +136,16 @@ function App() {
         {loginSignupBox === 123 && (
           <div className="modal-overlay">
             <div className="modal-content">
-              <h2 className="modal-heading">Login</h2>
+              <div className="headinglayout">
+                <h2 className="modal-heading">Login</h2>
+                <button
+                  className="heading-button"
+                  onClick={() => closeLoginSignup(123)}
+                >
+                  X
+                </button>
+              </div>
+
               <hr className="break-line" />
               <div className="modal-inner-content">
                 <div>
@@ -181,7 +190,16 @@ function App() {
         {loginSignupBox === 321 && (
           <div className="modal-overlay">
             <div className="modal-content">
-              <h2 className="modal-heading">Register</h2>
+              <div className="headinglayout">
+                <h2 className="modal-heading">Register</h2>
+                <button
+                  className="heading-button"
+                  onClick={() => closeLoginSignup(321)}
+                >
+                  X
+                </button>
+              </div>
+
               <hr className="break-line" />
               <div className="modal-inner-content">
                 <div>

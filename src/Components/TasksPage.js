@@ -38,8 +38,11 @@ function TasksPage() {
   };
 
   useEffect(() => {
-    fetchTasks();
-    fetchTaskStats();
+    const interval = setInterval(() => {
+      fetchTasks();
+      fetchTaskStats();
+    }, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   const fetchTasks = () => {
@@ -122,8 +125,7 @@ function TasksPage() {
         setTaskStats(response.data);
         setTimeout(() => {
           fetchUpcomingTaskStats(response.data.next_task_id);
-        }, 1000);
-        console.log(TaskStats);
+        }, 100);
       })
       .catch((error) => {
         console.error("Error updating task stats:", error);
@@ -135,7 +137,6 @@ function TasksPage() {
       .get(`http://localhost:5001/getUpcomingTaskDetails/${taskId}`)
       .then((response) => {
         setUpcomingTaskDetails(response.data);
-        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error updating task stats:", error);
@@ -259,7 +260,15 @@ function TasksPage() {
       {TaskBox === 234 && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2 className="modal-heading">Create New Task</h2>
+            <div className="headinglayout">
+              <h2 className="modal-heading">Create New Task</h2>
+              <button
+                className="heading-button"
+                onClick={() => closeTaskBox(234)}
+              >
+                X
+              </button>
+            </div>
             <hr className="break-line" />
             <div className="modal-inner-content">
               <div>
@@ -331,49 +340,21 @@ function TasksPage() {
       {TaskBox !== null && TaskBox !== 234 && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h2 className="modal-heading">Edit Task: #{TaskBox}</h2>
+            <div className="headinglayout">
+              <h2 className="modal-heading">Edit Task: #{TaskBox}</h2>
+              <button
+                className="heading-button"
+                onClick={() => closeTaskBox(TaskBox)}
+              >
+                X
+              </button>
+            </div>
             <hr className="break-line" />
             <div className="modal-inner-content">
               <div>
                 {TaskBoxError && (
                   <p className="ErrorMessage">{"=> " + TaskBoxError + " <="}</p>
                 )}
-              </div>
-              <div className="inner-content-w-label">
-                <label className="InputLabel">Task Title</label>
-                <input
-                  className="InputBox"
-                  type="text"
-                  placeholder="Enter Task Title"
-                  value={newTaskData.title}
-                  onChange={(e) =>
-                    setNewTaskData({ ...newTaskData, title: e.target.value })
-                  }
-                />
-              </div>
-              <div className="inner-content-w-label">
-                <label className="InputLabel">Task Comments</label>
-                <input
-                  className="InputBox"
-                  type="text"
-                  placeholder="Enter Task Comments"
-                  value={newTaskData.comment}
-                  onChange={(e) =>
-                    setNewTaskData({ ...newTaskData, comment: e.target.value })
-                  }
-                />
-              </div>
-              <div className="inner-content-w-label">
-                <label className="InputLabel">Task Due Date</label>
-                <input
-                  className="InputBox"
-                  type="datetime-local"
-                  placeholder="Enter Due Date"
-                  value={newTaskData.dueDate}
-                  onChange={(e) =>
-                    setNewTaskData({ ...newTaskData, dueDate: e.target.value })
-                  }
-                />
               </div>
               <div className="inner-content-w-label">
                 <label className="InputLabel">Task Status</label>

@@ -186,22 +186,18 @@ app.get("/getTasks", (req, res) => {
 // Update Task Endpoint
 app.put("/updateTask/:taskId", (req, res) => {
   const taskId = req.params.taskId;
-  const { title, comment, dueDate, status } = req.body;
+  const { status } = req.body;
 
-  const UPDATE_TASK_QUERY = `UPDATE tasks SET title = ?, comments = ?, due_date_time = ?, status = ? WHERE task_id = ?`;
-  db.query(
-    UPDATE_TASK_QUERY,
-    [title, comment, dueDate, status, taskId],
-    (err, result) => {
-      if (err) {
-        console.error("Error updating task:", err);
-        res.status(500).send("Error updating task");
-        return;
-      }
-      console.log("Task updated successfully");
-      res.status(200).send("Task updated successfully");
+  const UPDATE_TASK_QUERY = `UPDATE tasks SET status = ? WHERE task_id = ?`;
+  db.query(UPDATE_TASK_QUERY, [status, taskId], (err, result) => {
+    if (err) {
+      console.error("Error updating task:", err);
+      res.status(500).send("Error updating task");
+      return;
     }
-  );
+    console.log("Task updated successfully");
+    res.status(200).send("Task updated successfully");
+  });
 });
 
 // Delete Task Endpoint
