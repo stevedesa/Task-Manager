@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./App.css";
 import ToDoList from "./list.png";
-import TaskList from "./Components/TaskList";
 import WP from "./wp.jpg";
+import TasksPage from "./Components/TasksPage";
 
 function App() {
   const [loginSignupBox, setLoginSignupBox] = useState(null);
@@ -236,7 +236,7 @@ function App() {
           </div>
         )}
       </div>
-      <div className="TaskListDiv">{isLoggedIn && <TaskList />}</div>
+      <div className="TaskListDiv">{isLoggedIn && <TasksPage />}</div>
       {!isLoggedIn && (
         <div className="ImageDiv">
           <img src={WP} className="WP" alt="Task Manager" />
