@@ -326,6 +326,51 @@ app.get("/getUpcomingTaskDetails/:taskId", (req, res) => {
   });
 });
 
+// Endpoint to Save Note
+app.post("/saveNote", (req, res) => {
+  const { noteText } = req.body; // Extract noteText from request body
+  const SELECT_USER_ID_QUERY = `SELECT user_id FROM users WHERE email = ?`;
+  db.query(SELECT_USER_ID_QUERY, [LoggedInUser], (err, userResult) => {
+    if (err) {
+      console.error("Error retrieving user_id:", err);
+      res.status(500).send("Error retrieving user_id");
+      return;
+    }
+    const userId = userResult[0].user_id;
+    const INSERT_NOTE_QUERY = `INSERT INTO notes (user_id, note) VALUES (?, ?) ON DUPLICATE KEY UPDATE note = VALUES(note)`;
+    db.query(INSERT_NOTE_QUERY, [userId, noteText], (err, result) => {
+      if (err) {
+        console.error("Error saving note:", err);
+        res.status(500).send("Error saving note");
+        return;
+      }
+      res.status(200).send("Note saved successfully");
+    });
+  });
+});
+
+// Endpoint to get the note of user
+app.get("/getNote", (req, res) => {
+  const SELECT_USER_ID_QUERY = `SELECT user_id FROM users WHERE email = ?`;
+  db.query(SELECT_USER_ID_QUERY, [LoggedInUser], (err, userResult) => {
+    if (err) {
+      console.error("Error retrieving user_id:", err);
+      res.status(500).send("Error retrieving user_id");
+      return;
+    }
+    const userId = userResult[0].user_id;
+    const SELECT_NOTES_QUERY = `SELECT * FROM notes WHERE user_id = ?`;
+    db.query(SELECT_NOTES_QUERY, [userId], (err, notesResult) => {
+      if (err) {
+        console.error("Error retrieving notes:", err);
+        res.status(500).send("Error retrieving notes");
+        return;
+      }
+      res.status(200).json(notesResult);
+    });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

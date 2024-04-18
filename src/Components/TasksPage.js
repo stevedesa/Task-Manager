@@ -45,6 +45,10 @@ function TasksPage() {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    fetchNote();
+  }, []);
+
   const fetchTasks = () => {
     axios
       .get("http://localhost:5001/getTasks")
@@ -140,6 +144,32 @@ function TasksPage() {
       })
       .catch((error) => {
         console.error("Error updating task stats:", error);
+      });
+  };
+
+  const fetchNote = () => {
+    axios
+      .get(`http://localhost:5001/getNote`)
+      .then((response) => {
+        setNoteText(response.data[0].note || "");
+      })
+      .catch((error) => {
+        console.error("Error fetching note:", error);
+      });
+  };
+
+  const handleNoteChange = (event) => {
+    const newText = event.target.value;
+    setNoteText(newText);
+    saveNoteToDB(newText);
+  };
+
+  const saveNoteToDB = (text) => {
+    axios
+      .post("http://localhost:5001/saveNote", { noteText: text })
+      .then((response) => {})
+      .catch((error) => {
+        console.error("Error saving note:", error);
       });
   };
 
@@ -253,7 +283,7 @@ function TasksPage() {
           className="NoteInput"
           placeholder="Write Your Notes Here..."
           value={noteText}
-          onChange={(e) => setNoteText(e.target.value)}
+          onChange={handleNoteChange}
         ></textarea>
       </div>
 
