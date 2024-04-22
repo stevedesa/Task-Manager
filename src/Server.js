@@ -125,13 +125,11 @@ app.post("/createTask", (req, res) => {
 
 // Retrieve Tasks Endpoint
 app.get("/getTasks", (req, res) => {
-  // Check if a user is logged in
   if (!LoggedInUser) {
     res.status(401).send("Unauthorized");
     return;
   }
 
-  // Retrieve user_id using LoggedInUser email
   const SELECT_USER_ID_QUERY = `SELECT user_id FROM users WHERE email = ?`;
   db.query(SELECT_USER_ID_QUERY, [LoggedInUser], (err, userResult) => {
     if (err) {
@@ -140,10 +138,8 @@ app.get("/getTasks", (req, res) => {
       return;
     }
 
-    // Extract user_id from the result
     const user_id = userResult[0].user_id;
 
-    // Update tasks that are overdue
     const UPDATE_OVERDUE_TASKS_QUERY = `
       UPDATE tasks
       SET status = 'OverDue'
@@ -175,8 +171,6 @@ app.get("/getTasks", (req, res) => {
           res.status(500).send("Error retrieving tasks");
           return;
         }
-
-        // Send the retrieved tasks as a response
         res.status(200).json(tasksResult);
       });
     });
@@ -186,18 +180,22 @@ app.get("/getTasks", (req, res) => {
 // Update Task Endpoint
 app.put("/updateTask/:taskId", (req, res) => {
   const taskId = req.params.taskId;
-  const { status } = req.body;
+  const { title, comment, dueDate, status } = req.body;
 
-  const UPDATE_TASK_QUERY = `UPDATE tasks SET status = ? WHERE task_id = ?`;
-  db.query(UPDATE_TASK_QUERY, [status, taskId], (err, result) => {
-    if (err) {
-      console.error("Error updating task:", err);
-      res.status(500).send("Error updating task");
-      return;
+  const UPDATE_TASK_QUERY = `UPDATE tasks SET title = ?, comments = ?, due_date_time = ?, status = ? WHERE task_id = ?`;
+  db.query(
+    UPDATE_TASK_QUERY,
+    [title, comment, dueDate, status, taskId],
+    (err, result) => {
+      if (err) {
+        console.error("Error updating task:", err);
+        res.status(500).send("Error updating task");
+        return;
+      }
+      console.log("Task updated successfully");
+      res.status(200).send("Task updated successfully");
     }
-    console.log("Task updated successfully");
-    res.status(200).send("Task updated successfully");
-  });
+  );
 });
 
 // Delete Task Endpoint
@@ -228,8 +226,6 @@ app.post("/updateTaskStats", (req, res) => {
     }
     const user_id = userResult[0].user_id;
 
-    // Calculate task stats here
-    // Query the database to get the relevant task information
     const CALCULATE_TASK_STATS_QUERY = `
       SELECT COUNT(*) AS completed_tasks,
       (SELECT COUNT(*) FROM tasks WHERE status = 'To-Be-Completed' AND user_id = ?) AS incomplete_tasks,
@@ -248,7 +244,6 @@ app.post("/updateTaskStats", (req, res) => {
           return;
         }
         const taskStats = result[0];
-        // Update task stats table
         const UPDATE_TASK_STATS_QUERY = `
           INSERT INTO taskstats (user_id, completed_tasks, incomplete_tasks, overdue_tasks, next_task_id)
           VALUES (?, ?, ?, ?, ?)
@@ -285,13 +280,11 @@ app.post("/updateTaskStats", (req, res) => {
 app.get("/getUpcomingTaskDetails/:taskId", (req, res) => {
   const taskId = req.params.taskId;
 
-  // Check if a user is logged in
   if (!LoggedInUser) {
     res.status(401).send("Unauthorized");
     return;
   }
 
-  // Retrieve user_id using LoggedInUser email
   const SELECT_USER_ID_QUERY = `SELECT user_id FROM users WHERE email = ?`;
   db.query(SELECT_USER_ID_QUERY, [LoggedInUser], (err, userResult) => {
     if (err) {
@@ -300,10 +293,8 @@ app.get("/getUpcomingTaskDetails/:taskId", (req, res) => {
       return;
     }
 
-    // Extract user_id from the result
     const user_id = userResult[0].user_id;
 
-    // Retrieve task details based on task_id and user_id
     const SELECT_TASK_DETAILS_QUERY = `
       SELECT title, due_date_time
       FROM tasks
@@ -319,8 +310,6 @@ app.get("/getUpcomingTaskDetails/:taskId", (req, res) => {
         res.status(404).send("Task not found");
         return;
       }
-
-      // Send the task details as a response
       res.status(200).json(result[0]);
     });
   });
@@ -328,7 +317,8 @@ app.get("/getUpcomingTaskDetails/:taskId", (req, res) => {
 
 // Endpoint to Save Note
 app.post("/saveNote", (req, res) => {
-  const { noteText } = req.body; // Extract noteText from request body
+  const { noteText } = req.body;
+  x;
   const SELECT_USER_ID_QUERY = `SELECT user_id FROM users WHERE email = ?`;
   db.query(SELECT_USER_ID_QUERY, [LoggedInUser], (err, userResult) => {
     if (err) {
@@ -367,6 +357,37 @@ app.get("/getNote", (req, res) => {
         return;
       }
       res.status(200).json(notesResult);
+    });
+  });
+});
+
+// Get Task Details Endpoint
+app.get("/getTask/:taskId", (req, res) => {
+  const taskId = req.params.taskId;
+
+  const SELECT_USER_ID_QUERY = `SELECT user_id FROM users WHERE email = ?`;
+  db.query(SELECT_USER_ID_QUERY, [LoggedInUser], (err, userResult) => {
+    if (err) {
+      console.error("Error retrieving user_id:", err);
+      res.status(500).send("Error retrieving user_id");
+      return;
+    }
+    const userId = userResult[0].user_id;
+
+    const GET_TASK_QUERY = `SELECT * FROM tasks WHERE task_id = ? AND user_id = ?`;
+    db.query(GET_TASK_QUERY, [taskId, userId], (err, result) => {
+      if (err) {
+        console.error("Error retrieving task details:", err);
+        res.status(500).send("Error retrieving task details");
+        return;
+      }
+      if (result.length === 0) {
+        res.status(404).send("Task not found");
+        return;
+      }
+      console.log(result);
+      const taskDetails = result[0];
+      res.status(200).json(taskDetails);
     });
   });
 });

@@ -30,6 +30,26 @@ function TasksPage() {
   });
 
   const openTaskBox = (index) => {
+    if (index !== 234) {
+      const taskId = index;
+      axios
+        .get(`http://localhost:5001/getTask/${taskId}`)
+        .then((response) => {
+          const taskDetails = response.data;
+          console.log(taskDetails);
+          setNewTaskData({
+            title: taskDetails.title,
+            comment: taskDetails.comments,
+            dueDate: taskDetails.due_date_time
+              ? new Date(taskDetails.due_date_time).toISOString().slice(0, 16)
+              : "",
+            status: taskDetails.status,
+          });
+        })
+        .catch((error) => {
+          console.error("Error fetching task details:", error);
+        });
+    }
     setTaskBox(index);
   };
 
@@ -387,7 +407,43 @@ function TasksPage() {
                 )}
               </div>
               <div className="inner-content-w-label">
-                <label className="InputLabel">Task Status</label>
+                <label className="InputLabel">Edit Task Title</label>
+                <input
+                  className="InputBox"
+                  type="text"
+                  placeholder="Enter Task Title"
+                  value={newTaskData.title}
+                  onChange={(e) =>
+                    setNewTaskData({ ...newTaskData, title: e.target.value })
+                  }
+                />
+              </div>
+              <div className="inner-content-w-label">
+                <label className="InputLabel">Edit Task Comments</label>
+                <input
+                  className="InputBox"
+                  type="text"
+                  placeholder="Enter Task Comments"
+                  value={newTaskData.comment}
+                  onChange={(e) =>
+                    setNewTaskData({ ...newTaskData, comment: e.target.value })
+                  }
+                />
+              </div>
+              <div className="inner-content-w-label">
+                <label className="InputLabel">Edit Task Due Date</label>
+                <input
+                  className="InputBox"
+                  type="datetime-local"
+                  placeholder="Enter Due Date"
+                  value={newTaskData.dueDate}
+                  onChange={(e) =>
+                    setNewTaskData({ ...newTaskData, dueDate: e.target.value })
+                  }
+                />
+              </div>
+              <div className="inner-content-w-label">
+                <label className="InputLabel">Edit Task Status</label>
                 <select
                   name="TaskStatus"
                   id="TaskStatus"
