@@ -152,7 +152,6 @@ app.get("/getTasks", (req, res) => {
         return;
       }
 
-      // Retrieve tasks ordered by status and due date
       const SELECT_TASKS_QUERY = `
         SELECT *
         FROM tasks
@@ -216,7 +215,6 @@ app.delete("/deleteTask/:taskId", (req, res) => {
 
 // Calculate and update task statistics
 app.post("/updateTaskStats", (req, res) => {
-  // Retrieve user_id using LoggedInUser email
   const SELECT_USER_ID_QUERY = `SELECT user_id FROM users WHERE email = ?`;
   db.query(SELECT_USER_ID_QUERY, [LoggedInUser], (err, userResult) => {
     if (err) {

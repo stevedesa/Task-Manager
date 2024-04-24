@@ -84,7 +84,7 @@ function TasksPage() {
     axios
       .post("http://localhost:5001/createTask", {
         ...newTaskData,
-        dueDate: newTaskData.dueDate, // Assuming it's already in the correct format
+        dueDate: newTaskData.dueDate,
       })
       .then((response) => {
         console.log(response.data);
